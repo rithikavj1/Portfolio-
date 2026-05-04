@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Get in Touch — Rithika</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+
+/* ══════════════════════════════════════════
+   SAME TOKENS AS PORTFOLIO
+══════════════════════════════════════════ */
+:root {
+  --bg:       #faf8f5;
+  --bg2:      #f4f1ec;
+  --white:    #ffffff;
+  --border:   #e8e2d9;
+  --border2:  #d8d0c4;
+
+  --ink:      #1e1b17;
+  --ink2:     #4a4540;
+  --ink3:     #8a837a;
+  --ink4:     #b8b0a6;
+
+  --rose:     #c17b6e;
+  --rose-lt:  #f5ede9;
+  --rose-mid: #e8c4bc;
+
+  --sage:     #6b8c7a;
+  --sage-lt:  #eaf0ec;
+  --sage-mid: #b8d0c4;
+
+  --sand:     #b8976a;
+  --sand-lt:  #f5ede0;
+  --sand-mid: #e0c89a;
+
+  --r:    12px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+
+  --serif: 'DM Serif Display', Georgia, serif;
+  --body:  'Jost', sans-serif;
+  --italic:'Cormorant Garamond', Georgia, serif;
+
+  --shadow-sm: 0 1px 4px rgba(0,0,0,.06);
+  --shadow:    0 4px 20px rgba(0,0,0,.07);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,.11);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.7;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+a { text-decoration:none; color:inherit; }
+::selection { background:var(--rose-mid); color:var(--ink); }
+
+/* Background */
+body::before {
+  content:'';
+  position:fixed; inset:0; z-index:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 85% 10%, rgba(193,123,110,.09) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 10% 85%, rgba(107,140,122,.07) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 70% at 50% 50%, rgba(250,248,245,1) 0%, transparent 100%);
+  pointer-events:none;
+}
+body::after {
+  content:''; position:fixed; inset:0; z-index:0;
+  opacity:.022; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:150px;
+}
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px 72px;
+  background:rgba(250,248,245,.88);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  box-shadow:var(--shadow-sm);
+}
+.nav-logo {
+  font-family:var(--serif); font-size:1.4rem;
+  color:var(--ink); letter-spacing:.01em;
+}
+.nav-logo span { font-style:italic; color:var(--rose); }
+.nav-back {
+  display:flex; align-items:center; gap:8px;
+  font-size:.8rem; font-weight:500; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--ink3);
+  padding:10px 20px; border:1.5px solid var(--border2);
+  border-radius:100px; transition:all .25s;
+}
+.nav-back:hover { border-color:var(--rose-mid); color:var(--rose); }
+.nav-back svg { transition:transform .25s; }
+.nav-back:hover svg { transform:translateX(-3px); }
+
+/* ── PAGE LAYOUT ── */
+.page {
+  position:relative; z-index:1;
+  min-height:100vh;
+  display:grid; grid-template-columns:1fr 1fr;
+  padding-top:80px;
+}
+
+/* ── LEFT PANEL ── */
+.left-panel {
+  padding:80px 64px 60px 72px;
+  display:flex; flex-direction:column; justify-content:center;
+  border-right:1px solid var(--border);
+  position:sticky; top:80px; height:calc(100vh - 80px);
+  overflow:hidden;
+}
+.lp-label {
+  font-size:.75rem; font-weight:600; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--rose);
+  display:flex; align-items:center; gap:12px;
+  margin-bottom:20px;
+  opacity:0; animation:up .7s .1s ease forwards;
+}
+.lp-label::before { content:''; width:24px; height:1px; background:var(--rose); }
+.lp-h {
+  font-family:var(--serif);
+  font-size:clamp(2.2rem,3.5vw,3.4rem);
+  font-weight:400; line-height:1.1; letter-spacing:-.01em;
+  color:var(--ink); margin-bottom:20px;
+  opacity:0; animation:up .7s .2s ease forwards;
+}
+.lp-h em { font-style:italic; color:var(--rose); }
+.lp-sub {
+  font-family:var(--italic); font-style:italic;
+  font-size:1rem; color:var(--ink3); line-height:1.8;
+  margin-bottom:44px; max-width:380px;
+  opacity:0; animation:up .7s .3s ease forwards;
+}
+.lp-info {
+  display:flex; flex-direction:column; gap:18px;
+  opacity:0; animation:up .7s .4s ease forwards;
+}
+.lp-row {
+  display:flex; align-items:flex-start; gap:14px;
+}
+.lp-icon {
+  width:38px; height:38px; border-radius:10px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1rem;
+}
+.ic-rose { background:var(--rose-lt); }
+.ic-sage { background:var(--sage-lt); }
+.ic-sand { background:var(--sand-lt); }
+.lp-row-title {
+  font-family:var(--serif); font-size:.9rem; color:var(--ink); margin-bottom:2px;
+}
+.lp-row-text { font-size:.8rem; color:var(--ink3); line-height:1.55; }
+.lp-divider {
+  margin:32px 0; height:1px; background:var(--border);
+  opacity:0; animation:up .7s .5s ease forwards;
+}
+.lp-promise {
+  display:flex; align-items:center; gap:10px;
+  background:var(--sage-lt); border:1px solid var(--sage-mid);
+  border-radius:10px; padding:14px 16px;
+  opacity:0; animation:up .7s .55s ease forwards;
+}
+.lp-promise-dot {
+  width:7px; height:7px; border-radius:50%;
+  background:var(--sage); flex-shrink:0;
+  animation:pulse 2.4s ease infinite;
+}
+.lp-promise-text { font-size:.78rem; font-weight:500; color:var(--sage); }
+
+/* Decorative blobs */
+.blob {
+  position:absolute; border-radius:50%; opacity:.06; filter:blur(60px);
+  pointer-events:none;
+}
+.blob-1 { width:300px; height:300px; background:var(--rose); bottom:-60px; left:-80px; }
+.blob-2 { width:200px; height:200px; background:var(--sage); top:60px; right:-40px; }
+
+/* ── RIGHT PANEL (FORM) ── */
+.right-panel {
+  padding:80px 72px 60px 64px;
+  display:flex; flex-direction:column; justify-content:center;
+  overflow-y:auto;
+}
+
+/* Form card */
+.form-card {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--r-xl);
+  padding:48px 44px;
+  box-shadow:var(--shadow-lg);
+  opacity:0; animation:up .8s .3s ease forwards;
+  max-width:520px; width:100%;
+}
+.form-top-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:.72rem; font-weight:600; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--rose);
+  background:var(--rose-lt); border:1px solid var(--rose-mid);
+  padding:6px 16px; border-radius:100px; margin-bottom:28px;
+}
+.form-top-badge::before {
+  content:''; width:6px; height:6px; border-radius:50%;
+  background:var(--rose); display:block;
+}
+.form-title {
+  font-family:var(--serif); font-size:1.6rem; color:var(--ink);
+  line-height:1.2; margin-bottom:8px;
+}
+.form-title em { font-style:italic; color:var(--rose); }
+.form-desc { font-size:.85rem; color:var(--ink3); line-height:1.65; margin-bottom:36px; }
+
+/* Fields */
+.field { margin-bottom:22px; }
+.field-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+label {
+  display:block; font-size:.75rem; font-weight:600;
+  letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ink3); margin-bottom:8px;
+}
+label span { color:var(--rose); margin-left:2px; }
+input, textarea, select {
+  width:100%; font-family:var(--body); font-size:.9rem;
+  color:var(--ink); background:var(--bg);
+  border:1.5px solid var(--border);
+  border-radius:var(--r); padding:13px 16px;
+  outline:none; transition:all .25s;
+  -webkit-appearance:none; appearance:none;
+  resize:none;
+}
+input::placeholder, textarea::placeholder { color:var(--ink4); }
+input:focus, textarea:focus, select:focus {
+  border-color:var(--rose-mid);
+  background:var(--white);
+  box-shadow:0 0 0 3px rgba(193,123,110,.08);
+}
+input:focus::placeholder, textarea:focus::placeholder { color:var(--ink4); opacity:.6; }
+textarea { min-height:130px; line-height:1.65; }
+
+/* Enquiry type selector */
+.type-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:10px;
+  margin-top:0;
+}
+.type-opt {
+  position:relative;
+}
+.type-opt input[type="radio"] {
+  position:absolute; opacity:0; width:0; height:0;
+}
+.type-opt label {
+  display:flex; align-items:center; gap:10px;
+  font-size:.82rem; font-weight:500; letter-spacing:.02em;
+  text-transform:none; color:var(--ink3);
+  background:var(--bg); border:1.5px solid var(--border);
+  border-radius:var(--r); padding:13px 16px;
+  cursor:pointer; transition:all .25s; margin-bottom:0;
+}
+.type-opt input[type="radio"]:checked + label {
+  border-color:var(--rose-mid);
+  background:var(--rose-lt);
+  color:var(--rose);
+  box-shadow:0 0 0 3px rgba(193,123,110,.08);
+}
+.type-opt label .t-icon { font-size:1.1rem; }
+.type-opt label .t-text { display:flex; flex-direction:column; gap:1px; }
+.type-opt label .t-title { font-weight:600; font-size:.83rem; color:var(--ink2); }
+.type-opt label .t-sub   { font-size:.72rem; color:var(--ink4); }
+.type-opt input[type="radio"]:checked + label .t-title { color:var(--rose); }
+.type-opt input[type="radio"]:checked + label .t-sub   { color:var(--rose); opacity:.7; }
+
+/* Submit btn */
+.submit-btn {
+  width:100%; margin-top:8px;
+  background:var(--rose); color:#fff;
+  font-family:var(--body); font-size:.88rem; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase;
+  padding:16px; border-radius:100px; border:none;
+  cursor:pointer; box-shadow:0 4px 20px rgba(193,123,110,.3);
+  transition:all .3s; display:flex; align-items:center; justify-content:center; gap:10px;
+}
+.submit-btn:hover { background:#b36b5e; box-shadow:0 8px 32px rgba(193,123,110,.45); transform:translateY(-1px); }
+.submit-btn:active { transform:translateY(0); }
+.submit-btn .btn-icon { font-size:1rem; transition:transform .3s; }
+.submit-btn:hover .btn-icon { transform:translateX(4px); }
+.submit-btn.loading { opacity:.75; pointer-events:none; }
+
+/* Loading spinner */
+.spinner {
+  width:18px; height:18px; border:2px solid rgba(255,255,255,.4);
+  border-top-color:#fff; border-radius:50%;
+  animation:spin .7s linear infinite; display:none;
+}
+.submit-btn.loading .spinner { display:block; }
+.submit-btn.loading .btn-text { display:none; }
+.submit-btn.loading .btn-icon { display:none; }
+
+/* Privacy note */
+.privacy-note {
+  text-align:center; font-size:.72rem; color:var(--ink4);
+  margin-top:16px; line-height:1.5;
+}
+.privacy-note a { color:var(--rose); border-bottom:1px solid var(--rose-mid); }
+
+/* ── SUCCESS STATE ── */
+.success-state {
+  display:none; flex-direction:column; align-items:center;
+  text-align:center; padding:20px 0;
+}
+.success-icon {
+  width:72px; height:72px; border-radius:50%;
+  background:var(--sage-lt); border:1.5px solid var(--sage-mid);
+  display:flex; align-items:center; justify-content:center;
+  font-size:2rem; margin-bottom:24px;
+  animation:popIn .5s ease;
+}
+.success-h {
+  font-family:var(--serif); font-size:1.6rem; color:var(--ink);
+  margin-bottom:12px; line-height:1.2;
+}
+.success-h em { font-style:italic; color:var(--sage); }
+.success-sub { font-size:.9rem; color:var(--ink3); line-height:1.7; margin-bottom:28px; max-width:340px; }
+.success-back {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:.8rem; font-weight:600; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--rose);
+  padding:12px 28px; border:1.5px solid var(--rose-mid);
+  border-radius:100px; background:var(--rose-lt);
+  transition:all .25s;
+}
+.success-back:hover { background:var(--rose); color:#fff; border-color:var(--rose); }
+
+/* ── ANIMATIONS ── */
+@keyframes up {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:none; }
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:.5; transform:scale(.82); }
+}
+@keyframes spin { to { transform:rotate(360deg); } }
+@keyframes popIn {
+  from { transform:scale(.6); opacity:0; }
+  50%  { transform:scale(1.1); }
+  to   { transform:scale(1); opacity:1; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--border2); border-radius:2px; }
+::-webkit-scrollbar-thumb:hover { background:var(--rose-mid); }
+
+/* ── RESPONSIVE ── */
+@media (max-width:860px) {
+  nav { padding:16px 24px; }
+  .page { grid-template-columns:1fr; }
+  .left-panel {
+    position:static; height:auto;
+    padding:40px 24px 32px; border-right:none;
+    border-bottom:1px solid var(--border);
+  }
+  .right-panel { padding:40px 24px 60px; }
+  .form-card { padding:32px 24px; }
+  .field-row { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Rithika<span>.</span></div>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Back to Home
+  </a>
+</nav>
+
+<!-- PAGE -->
+<div class="page">
+
+  <!-- ══ LEFT PANEL ══ -->
+  <div class="left-panel">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="lp-label">Get in Touch</div>
+    <h1 class="lp-h">Let's work<br/><em>together.</em></h1>
+    <p class="lp-sub">
+      Whether you need a sharp designer, a developer, or a dedicated UPSC mentor — I'd love to hear from you.
+    </p>
+
+    <div class="lp-info">
+      <div class="lp-row">
+        <div class="lp-icon ic-rose">💻</div>
+        <div>
+          <div class="lp-row-title">Design &amp; Development</div>
+          <div class="lp-row-text">UI/UX, web apps, AI integration &amp; business analysis — end to end.</div>
+        </div>
+      </div>
+      <div class="lp-row">
+        <div class="lp-icon ic-sage">🏛️</div>
+        <div>
+          <div class="lp-row-title">UPSC Mentoring</div>
+          <div class="lp-row-text">Personalised guidance through the full CSE journey — Polity &amp; Environment specialist.</div>
+        </div>
+      </div>
+      <div class="lp-row">
+        <div class="lp-icon ic-sand">📄</div>
+        <div>
+          <div class="lp-row-title">IEEE Research</div>
+          <div class="lp-row-text">Deep learning &amp; AI expertise — published researcher available for collaboration.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lp-divider"></div>
+
+    <div class="lp-promise">
+      <div class="lp-promise-dot"></div>
+      <div class="lp-promise-text">I respond to every enquiry within 24 hours.</div>
+    </div>
+  </div>
+
+  <!-- ══ RIGHT PANEL ══ -->
+  <div class="right-panel">
+    <div class="form-card">
+
+      <div class="form-top-badge" id="form-badge">New Enquiry</div>
+      <div class="form-title">Tell me about<br/>your <em>project.</em></div>
+      <div class="form-desc">Fill in your details below and I'll get back to you within 24 hours.</div>
+
+      <!-- FORM — uses Formspree for email delivery -->
+      <!-- ⚠️  SETUP: Replace YOUR_FORM_ID below after signing up at https://formspree.io -->
+      <form id="contact-form" action="https://formspree.io/f/mgodozpp" method="POST" novalidate>
+
+        <!-- Hidden fields -->
+        <input type="hidden" name="_subject" value="New Enquiry from Portfolio — Rithika"/>
+        <input type="hidden" name="_next" value=""/>
+        <input type="text" name="_gotcha" style="display:none"/>
+
+        <!-- Name + Email row -->
+        <div class="field field-row">
+          <div>
+            <label for="name">Your Name <span>*</span></label>
+            <input type="text" id="name" name="name" placeholder="e.g. Priya Sharma" required autocomplete="name"/>
+            <div class="err" id="err-name"></div>
+          </div>
+          <div>
+            <label for="email">Email Address <span>*</span></label>
+            <input type="email" id="email" name="_replyto" placeholder="rithikavj1@gmail.com" required autocomplete="email"/>
+            <div class="err" id="err-email"></div>
+          </div>
+        </div>
+
+        <!-- Enquiry Type -->
+        <div class="field">
+          <label>Enquiry Type <span>*</span></label>
+          <div class="type-grid" style="grid-template-columns:repeat(3,1fr);">
+            <div class="type-opt">
+              <input type="radio" name="enquiry_type" id="t-dev" value="Design & Development" required/>
+              <label for="t-dev">
+                <span class="t-icon">💻</span>
+                <span class="t-text">
+                  <span class="t-title">Design &amp; Dev</span>
+                  <span class="t-sub">Web, App, AI</span>
+                </span>
+              </label>
+            </div>
+            <div class="type-opt">
+              <input type="radio" name="enquiry_type" id="t-upsc" value="UPSC Mentoring"/>
+              <label for="t-upsc">
+                <span class="t-icon">🏛️</span>
+                <span class="t-text">
+                  <span class="t-title">UPSC Mentoring</span>
+                  <span class="t-sub">Guidance &amp; Strategy</span>
+                </span>
+              </label>
+            </div>
+            <div class="type-opt">
+              <input type="radio" name="enquiry_type" id="t-dm" value="Digital Marketing"/>
+              <label for="t-dm">
+                <span class="t-icon">🎯</span>
+                <span class="t-text">
+                  <span class="t-title">Digital Marketing</span>
+                  <span class="t-sub">Branding &amp; Social</span>
+                </span>
+              </label>
+            </div>
+
+            <div class="type-opt">
+              <input type="radio" name="enquiry_type" id="t-other" value="Other"/>
+              <label for="t-other">
+                <span class="t-icon">✉️</span>
+                <span class="t-text">
+                  <span class="t-title">Other</span>
+                  <span class="t-sub">Tell me more</span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="err" id="err-type"></div>
+        </div>
+
+        <!-- About Enquiry -->
+        <div class="field">
+          <label for="message">About Your Enquiry <span>*</span></label>
+          <textarea id="message" name="message" placeholder="Tell me what you're working on, what you need help with, or what you'd like to discuss. The more detail the better!" required></textarea>
+          <div class="err" id="err-msg"></div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="submit-btn" id="submit-btn">
+          <span class="btn-text">Send Message</span>
+          <span class="btn-icon">→</span>
+          <div class="spinner"></div>
+        </button>
+
+        <div class="privacy-note">
+          Your details are kept private and used only to respond to your enquiry.
+        </div>
+
+      </form>
+
+      <!-- SUCCESS STATE (shown after submit) -->
+      <div class="success-state" id="success-state">
+        <div class="success-icon">🌿</div>
+        <div class="success-h">Message <em>received!</em></div>
+        <div class="success-sub">
+          Thank you for reaching out. I've received your enquiry and will get back to you within 24 hours.
+        </div>
+        <a href="index.html" class="success-back">← Back to Portfolio</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ── Pre-fill enquiry type from URL param ── */
+(function() {
+  const p = new URLSearchParams(window.location.search).get('type');
+  if (p === 'dev')  document.getElementById('t-dev').checked  = true;
+  if (p === 'upsc') document.getElementById('t-upsc').checked = true;
+  if (p === 'dm')   document.getElementById('t-dm').checked   = true;
+})();
+
+/* ── Inline error styles ── */
+const errStyle = document.createElement('style');
+errStyle.textContent = `.err{font-size:.72rem;color:var(--rose);margin-top:5px;min-height:16px;letter-spacing:.02em;}
+input.invalid,textarea.invalid{border-color:var(--rose)!important;background:#fff8f7!important;}`;
+document.head.appendChild(errStyle);
+
+/* ── Form submission via fetch (AJAX) ── */
+const form   = document.getElementById('contact-form');
+const btn    = document.getElementById('submit-btn');
+const sState = document.getElementById('success-state');
+
+function validate() {
+  let ok = true;
+
+  // Name
+  const name = document.getElementById('name');
+  const errN  = document.getElementById('err-name');
+  if (!name.value.trim()) {
+    errN.textContent = 'Please enter your name.';
+    name.classList.add('invalid'); ok = false;
+  } else { errN.textContent = ''; name.classList.remove('invalid'); }
+
+  // Email
+  const email = document.getElementById('email');
+  const errE  = document.getElementById('err-email');
+  const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email.value.trim() || !emailRx.test(email.value)) {
+    errE.textContent = 'Please enter a valid email.';
+    email.classList.add('invalid'); ok = false;
+  } else { errE.textContent = ''; email.classList.remove('invalid'); }
+
+  // Type
+  const errT = document.getElementById('err-type');
+  const typeOk = document.querySelector('input[name="enquiry_type"]:checked');
+  if (!typeOk) { errT.textContent = 'Please select an enquiry type.'; ok = false; }
+  else         { errT.textContent = ''; }
+
+  // Message
+  const msg  = document.getElementById('message');
+  const errM = document.getElementById('err-msg');
+  if (!msg.value.trim() || msg.value.trim().length < 10) {
+    errM.textContent = 'Please tell me a bit more (at least 10 characters).';
+    msg.classList.add('invalid'); ok = false;
+  } else { errM.textContent = ''; msg.classList.remove('invalid'); }
+
+  return ok;
+}
+
+form.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  if (!validate()) return;
+
+  btn.classList.add('loading');
+
+  try {
+    const data = new FormData(form);
+    const res  = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (res.ok) {
+      // Show success
+      form.style.display = 'none';
+      sState.style.display = 'flex';
+    } else {
+      const json = await res.json();
+      if (json.errors) {
+        alert('Something went wrong: ' + json.errors.map(e => e.message).join(', '));
+      } else {
+        alert('Something went wrong. Please try again or email directly.');
+      }
+      btn.classList.remove('loading');
+    }
+  } catch (err) {
+    alert('Network error. Please check your connection and try again.');
+    btn.classList.remove('loading');
+  }
+});
+
+/* Clear invalid on input */
+document.querySelectorAll('input, textarea').forEach(el => {
+  el.addEventListener('input', () => el.classList.remove('invalid'));
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rithika — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+
+/* ══════════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════════ */
+:root {
+  --bg:       #faf8f5;
+  --bg2:      #f4f1ec;
+  --white:    #ffffff;
+  --border:   #e8e2d9;
+  --border2:  #d8d0c4;
+
+  --ink:      #1e1b17;
+  --ink2:     #4a4540;
+  --ink3:     #8a837a;
+  --ink4:     #b8b0a6;
+
+  --rose:     #c17b6e;
+  --rose-lt:  #f5ede9;
+  --rose-mid: #e8c4bc;
+
+  --sage:     #6b8c7a;
+  --sage-lt:  #eaf0ec;
+  --sage-mid: #b8d0c4;
+
+  --sand:     #b8976a;
+  --sand-lt:  #f5ede0;
+  --sand-mid: #e0c89a;
+
+  --lavender:    #8b7eb8;
+  --lavender-lt: #f0edf8;
+
+  /* ── Digital Marketing accent ── */
+  --plum:        #9b6fa0;
+  --plum-lt:     #f6f0f8;
+  --plum-mid:    #d4b4da;
+
+  --r:    12px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+
+  --serif:  'DM Serif Display', 'Cormorant Garamond', Georgia, serif;
+  --body:   'Jost', sans-serif;
+  --italic: 'Cormorant Garamond', Georgia, serif;
+
+  --shadow-sm: 0 1px 4px rgba(0,0,0,.06);
+  --shadow:    0 4px 20px rgba(0,0,0,.07);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.10);
+}
+
+/* ══════════════════════════════════════════
+   RESET
+══════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+::selection { background: var(--rose-mid); color: var(--ink); }
+img { max-width: 100%; }
+
+/* ══════════════════════════════════════════
+   BACKGROUND TEXTURE
+══════════════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 90% 5%, rgba(193,123,110,.08) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 5% 80%, rgba(107,140,122,.07) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 60% at 50% 50%, rgba(250,248,245,1) 0%, transparent 100%);
+  pointer-events: none;
+}
+section, nav, footer { position: relative; z-index: 1; }
+
+/* Subtle grain */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  opacity: .025;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 150px;
+}
+
+/* ══════════════════════════════════════════
+   NAV
+══════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 72px;
+  transition: all .4s ease;
+}
+nav.scrolled {
+  background: rgba(250,248,245,.92);
+  backdrop-filter: blur(20px);
+  padding: 16px 72px;
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: .01em;
+}
+.nav-logo span { color: var(--rose); font-style: italic; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: .8rem; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink3); transition: color .25s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  font-size: .8rem; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase;
+  color: var(--rose); padding: 10px 24px;
+  border: 1.5px solid var(--rose-mid);
+  border-radius: 100px;
+  background: var(--rose-lt);
+  transition: all .25s; cursor: pointer;
+}
+.nav-cta:hover { background: var(--rose); color: #fff; border-color: var(--rose); }
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+#home {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 72px 80px;
+}
+.hero-wrap {
+  max-width: 1160px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 420px;
+  gap: 80px; align-items: center; width: 100%;
+}
+
+/* Left */
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: .75rem; font-weight: 500; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--sage);
+  background: var(--sage-lt); border: 1px solid var(--sage-mid);
+  padding: 6px 16px; border-radius: 100px;
+  margin-bottom: 28px;
+  opacity: 0; animation: up .8s .1s ease forwards;
+}
+.hero-pill::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--sage); display: block;
+  animation: pulse 2s ease infinite;
+}
+.hero-h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 5vw, 4.8rem);
+  font-weight: 400; line-height: 1.1;
+  letter-spacing: -.01em; color: var(--ink);
+  margin-bottom: 24px;
+  opacity: 0; animation: up .8s .22s ease forwards;
+}
+.hero-h1 em {
+  font-family: var(--italic);
+  font-style: italic; color: var(--rose);
+}
+.hero-sub {
+  font-family: var(--italic); font-style: italic;
+  font-size: 1.1rem; font-weight: 400;
+  color: var(--ink3); line-height: 1.75;
+  max-width: 480px; margin-bottom: 40px;
+  opacity: 0; animation: up .8s .34s ease forwards;
+}
+.hero-tags {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-bottom: 44px;
+  opacity: 0; animation: up .8s .46s ease forwards;
+}
+.tag {
+  font-size: .75rem; font-weight: 500; letter-spacing: .04em;
+  padding: 7px 16px; border-radius: 100px;
+  border: 1px solid var(--border2);
+  color: var(--ink3); background: var(--white);
+  box-shadow: var(--shadow-sm);
+  transition: all .2s;
+}
+.tag:hover { border-color: var(--rose-mid); color: var(--rose); }
+.tag.t-rose { background: var(--rose-lt); border-color: var(--rose-mid); color: var(--rose); }
+.tag.t-sage { background: var(--sage-lt); border-color: var(--sage-mid); color: var(--sage); }
+.tag.t-sand { background: var(--sand-lt); border-color: var(--sand-mid); color: var(--sand); }
+.hero-btns {
+  display: flex; gap: 14px; align-items: center;
+  opacity: 0; animation: up .8s .58s ease forwards;
+}
+.btn-fill {
+  font-size: .82rem; font-weight: 600; letter-spacing: .06em;
+  text-transform: uppercase; color: #fff;
+  background: var(--rose); padding: 14px 32px;
+  border-radius: 100px; border: none; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(193,123,110,.3);
+  transition: all .25s; display: inline-block;
+}
+.btn-fill:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(193,123,110,.4); }
+.btn-ghost {
+  font-size: .82rem; font-weight: 500; letter-spacing: .04em;
+  color: var(--ink3); padding: 14px 24px;
+  border: 1.5px solid var(--border2); border-radius: 100px;
+  transition: all .25s; display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--ink3); color: var(--ink); }
+
+/* Right — profile card */
+.hero-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 36px 32px;
+  box-shadow: var(--shadow-lg);
+  display: flex; flex-direction: column; gap: 22px;
+  opacity: 0; animation: up .9s .4s ease forwards;
+}
+.hc-top { display: flex; align-items: center; gap: 16px; }
+.hc-ava {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose) 0%, var(--sand) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: 1.6rem;
+  color: #fff; flex-shrink: 0;
+}
+.hc-name {
+  font-family: var(--serif); font-size: 1.2rem; color: var(--ink);
+}
+.hc-role {
+  font-size: .75rem; font-weight: 500; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--ink3); margin-top: 3px;
+}
+.hc-divider { height: 1px; background: var(--border); }
+.hc-stats {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
+}
+.hc-stat {
+  text-align: center;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 8px;
+}
+.hc-sv {
+  font-family: var(--serif); font-size: 1.5rem; color: var(--ink); line-height: 1;
+}
+.hc-sl {
+  font-size: .65rem; font-weight: 500; letter-spacing: .07em;
+  text-transform: uppercase; color: var(--ink4); margin-top: 4px;
+}
+.hc-skills { display: flex; flex-wrap: wrap; gap: 8px; }
+.hc-skill {
+  font-size: .73rem; font-weight: 500;
+  padding: 5px 13px; border-radius: 7px;
+  background: var(--bg2); border: 1px solid var(--border);
+  color: var(--ink3);
+}
+.hc-ieee {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--sand-lt); border: 1px solid var(--sand-mid);
+  border-radius: 10px; padding: 12px 16px;
+}
+.hc-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--sand); flex-shrink: 0;
+  animation: pulse 2.4s ease infinite;
+}
+.hc-ieee-text {
+  font-size: .72rem; font-weight: 500; color: var(--sand);
+}
+
+/* ══════════════════════════════════════════
+   WHAT I DO STRIP
+══════════════════════════════════════════ */
+.strip {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 56px 72px;
+}
+.strip-grid {
+  max-width: 1160px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
+}
+.strip-item { display: flex; flex-direction: column; gap: 12px; }
+.strip-icon {
+  font-size: 1.6rem; width: 48px; height: 48px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.strip-title {
+  font-family: var(--serif); font-size: 1rem;
+  color: var(--ink); font-weight: 400;
+}
+.strip-desc { font-size: .82rem; color: var(--ink3); line-height: 1.65; }
+
+/* ══════════════════════════════════════════
+   SECTION BASE
+══════════════════════════════════════════ */
+.sec { padding: 100px 72px; }
+.sec-inner { max-width: 1160px; margin: 0 auto; }
+.sec-label {
+  font-size: .75rem; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--rose);
+  display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+}
+.sec-label::before { content:''; width: 24px; height: 1px; background: var(--rose); }
+.sec-h {
+  font-family: var(--serif); font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+  font-weight: 400; line-height: 1.15; letter-spacing: -.01em;
+  color: var(--ink); margin-bottom: 14px;
+}
+.sec-h em { font-style: italic; color: var(--rose); }
+.sec-sub {
+  font-family: var(--italic); font-style: italic;
+  font-size: 1rem; color: var(--ink3); line-height: 1.75;
+  max-width: 460px; margin-bottom: 56px;
+}
+
+/* Reveal */
+.rv { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.rv.in { opacity: 1; transform: none; }
+.rv.d1 { transition-delay: .1s; }
+.rv.d2 { transition-delay: .2s; }
+.rv.d3 { transition-delay: .3s; }
+.rv.d4 { transition-delay: .4s; }
+
+/* ══════════════════════════════════════════
+   ABOUT
+══════════════════════════════════════════ */
+#about .sec-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+}
+.about-p {
+  font-size: .93rem; color: var(--ink3); line-height: 1.85; margin-bottom: 20px;
+}
+.about-p strong { color: var(--ink); font-weight: 600; }
+.about-cards { display: flex; flex-direction: column; gap: 14px; }
+.a-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 22px 20px;
+  display: flex; gap: 14px; align-items: flex-start;
+  box-shadow: var(--shadow-sm);
+  transition: all .3s;
+}
+.a-card:hover { border-color: var(--rose-mid); box-shadow: var(--shadow); transform: translateX(4px); }
+.a-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.ic-rose { background: var(--rose-lt); }
+.ic-sage { background: var(--sage-lt); }
+.ic-sand { background: var(--sand-lt); }
+.ic-lav  { background: var(--lavender-lt); }
+.ic-plum { background: var(--plum-lt); }
+.a-title { font-family: var(--serif); font-size: .95rem; color: var(--ink); margin-bottom: 3px; }
+.a-text  { font-size: .8rem; color: var(--ink3); line-height: 1.6; }
+
+/* ══════════════════════════════════════════
+   SKILLS
+══════════════════════════════════════════ */
+#skills { background: var(--white); }
+.skills-tabs {
+  display: flex; gap: 0; margin-bottom: 44px;
+  border: 1px solid var(--border); border-radius: 100px;
+  padding: 4px; width: fit-content;
+  background: var(--bg2);
+}
+.sk-tab {
+  font-size: .78rem; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink3);
+  padding: 10px 24px; border-radius: 100px;
+  border: none; background: transparent; cursor: pointer;
+  transition: all .25s;
+}
+.sk-tab.active {
+  background: var(--white); color: var(--rose);
+  box-shadow: var(--shadow-sm);
+}
+.sk-panel { display: none; }
+.sk-panel.active { display: block; }
+.skills-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px;
+}
+.sk-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 22px 20px;
+  transition: all .3s;
+}
+.sk-card:hover { background: var(--white); box-shadow: var(--shadow); border-color: var(--border2); }
+.sk-em { font-size: 1.3rem; margin-bottom: 12px; }
+.sk-name { font-family: var(--serif); font-size: .95rem; color: var(--ink); margin-bottom: 10px; }
+.sk-track { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.sk-bar {
+  height: 100%; border-radius: 2px;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 1s ease;
+}
+.bar-rose  { background: linear-gradient(90deg, var(--rose-mid), var(--rose)); }
+.bar-sage  { background: linear-gradient(90deg, var(--sage-mid), var(--sage)); }
+.bar-sand  { background: linear-gradient(90deg, var(--sand-mid), var(--sand)); }
+.bar-lav   { background: linear-gradient(90deg, #c4bde0, var(--lavender)); }
+.bar-plum  { background: linear-gradient(90deg, var(--plum-mid), var(--plum)); }
+.sk-card.go .sk-bar { transform: scaleX(1); }
+.sk-lv { font-size: .7rem; color: var(--ink4); margin-top: 7px; }
+
+/* ══════════════════════════════════════════
+   EXPERIENCE
+══════════════════════════════════════════ */
+#experience { background: var(--bg2); }
+.exp-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+}
+.ec {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 30px;
+  box-shadow: var(--shadow-sm);
+  transition: all .3s;
+  position: relative; overflow: hidden;
+}
+.ec::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; border-radius: 3px 0 0 3px;
+  transform: scaleY(0); transform-origin: top;
+  transition: transform .35s ease;
+}
+.ec:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.ec:hover::before { transform: scaleY(1); }
+.ec.rose::before   { background: var(--rose); }
+.ec.sage::before   { background: var(--sage); }
+.ec.sand::before   { background: var(--sand); }
+.ec.lav::before    { background: var(--lavender); }
+.ec.featured {
+  grid-column: span 2;
+  background: var(--white);
+  border-color: var(--border);
+}
+.ec.featured::before { transform: scaleY(1); }
+.ep {
+  display: inline-block; font-size: .68rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 5px 13px; border-radius: 100px; margin-bottom: 18px;
+}
+.ep-rose { background: var(--rose-lt); color: var(--rose); border: 1px solid var(--rose-mid); }
+.ep-sage { background: var(--sage-lt); color: var(--sage); border: 1px solid var(--sage-mid); }
+.ep-sand { background: var(--sand-lt); color: var(--sand); border: 1px solid var(--sand-mid); }
+.ep-lav  { background: var(--lavender-lt); color: var(--lavender); border: 1px solid #c4bde0; }
+.ec-org  { font-size: .75rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--ink4); margin-bottom: 7px; }
+.ec-title{ font-family: var(--serif); font-size: 1.15rem; color: var(--ink); margin-bottom: 5px; line-height: 1.25; }
+.ec-period { font-size: .75rem; color: var(--ink4); margin-bottom: 14px; }
+.ec-desc { font-size: .86rem; color: var(--ink3); line-height: 1.75; }
+.ec-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: .78rem; font-weight: 600; color: var(--sand);
+  margin-top: 14px; border-bottom: 1px solid var(--sand-mid);
+  padding-bottom: 1px; transition: all .2s;
+}
+.ec-link:hover { color: var(--ink); border-color: var(--ink3); }
+.ec-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.etc {
+  font-size: .7rem; padding: 4px 11px; border-radius: 6px;
+  background: var(--bg2); border: 1px solid var(--border); color: var(--ink3);
+}
+
+/* ══════════════════════════════════════════
+   HIRE ME
+══════════════════════════════════════════ */
+#hire { background: var(--bg); }
+.hire-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.hc2 {
+  border-radius: var(--r-xl); padding: 44px 40px;
+  border: 1px solid; position: relative; overflow: hidden;
+  transition: all .3s;
+}
+.hc2:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.hc2.dev  { background: var(--rose-lt);  border-color: var(--rose-mid); }
+.hc2.upsc { background: var(--sage-lt);  border-color: var(--sage-mid); }
+.hc2.dm   { background: var(--plum-lt);  border-color: var(--plum-mid); }
+.hc2-deco {
+  position: absolute; top: -60px; right: -60px;
+  width: 180px; height: 180px; border-radius: 50%;
+  opacity: .15;
+}
+.dev  .hc2-deco { background: var(--rose); }
+.upsc .hc2-deco { background: var(--sage); }
+.dm   .hc2-deco { background: var(--plum); }
+.hc2-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; margin-bottom: 22px;
+}
+.dev  .hc2-icon { background: rgba(193,123,110,.18); }
+.upsc .hc2-icon { background: rgba(107,140,122,.18); }
+.dm   .hc2-icon { background: rgba(155,111,160,.18); }
+.hc2-type {
+  font-size: .72rem; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; margin-bottom: 7px;
+}
+.dev  .hc2-type { color: var(--rose); }
+.upsc .hc2-type { color: var(--sage); }
+.dm   .hc2-type { color: var(--plum); }
+.hc2-title {
+  font-family: var(--serif); font-size: 1.4rem; color: var(--ink);
+  margin-bottom: 26px; line-height: 1.2;
+}
+.hc2-list { list-style: none; margin-bottom: 30px; }
+.hc2-list li {
+  font-size: .87rem; color: var(--ink2);
+  padding: 9px 0; border-bottom: 1px solid rgba(0,0,0,.06);
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.hc2-list li:last-child { border: none; padding-bottom: 0; }
+.hc2-list li::before { flex-shrink: 0; margin-top: 2px; font-size: .78rem; }
+.dev  .hc2-list li::before { content: '→'; color: var(--rose); }
+.upsc .hc2-list li::before { content: '→'; color: var(--sage); }
+.dm   .hc2-list li::before { content: '→'; color: var(--plum); }
+.hc2-btn {
+  width: 100%; padding: 14px; border-radius: 100px;
+  font-family: var(--body); font-size: .8rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  cursor: pointer; border: none; transition: all .25s;
+}
+.dev  .hc2-btn { background: var(--rose); color: #fff; box-shadow: 0 4px 18px rgba(193,123,110,.3); }
+.dev  .hc2-btn:hover { box-shadow: 0 8px 28px rgba(193,123,110,.45); }
+.upsc .hc2-btn { background: var(--sage); color: #fff; box-shadow: 0 4px 18px rgba(107,140,122,.3); }
+.upsc .hc2-btn:hover { box-shadow: 0 8px 28px rgba(107,140,122,.45); }
+.dm   .hc2-btn { background: var(--plum); color: #fff; box-shadow: 0 4px 18px rgba(155,111,160,.3); }
+.dm   .hc2-btn:hover { box-shadow: 0 8px 28px rgba(155,111,160,.45); }
+
+/* Contact Banner */
+.contact-banner {
+  margin-top: 36px; padding: 52px 56px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow);
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 40px;
+}
+.cb-h {
+  font-family: var(--serif); font-size: 2rem; color: var(--ink);
+  letter-spacing: -.01em; line-height: 1.2;
+}
+.cb-h em { font-style: italic; color: var(--rose); }
+.cb-sub { font-size: .9rem; color: var(--ink3); margin-top: 10px; }
+.cb-btns { display: flex; gap: 12px; flex-shrink: 0; }
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  padding: 32px 72px;
+}
+.footer-inner {
+  max-width: 1160px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.f-logo { font-family: var(--serif); font-size: 1.2rem; color: var(--ink); }
+.f-logo span { font-style: italic; color: var(--rose); }
+.f-copy { font-size: .75rem; color: var(--ink4); letter-spacing: .03em; }
+.f-links { display: flex; gap: 12px; }
+.f-link {
+  font-size: .78rem; font-weight: 500; color: var(--ink3);
+  padding: 8px 18px; border: 1px solid var(--border);
+  border-radius: 100px; background: var(--bg);
+  transition: all .2s;
+}
+.f-link:hover { border-color: var(--rose-mid); color: var(--rose); }
+
+/* ══════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════ */
+@keyframes up {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .5; transform: scale(.82); }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--rose-mid); }
+/* ══════════════════════════════════════════
+   ANIMATED BACKGROUND
+══════════════════════════════════════════ */
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(193,123,110,0.18), transparent 25%),
+    radial-gradient(circle at 80% 30%, rgba(0,109,119,0.14), transparent 25%),
+    radial-gradient(circle at 50% 80%, rgba(255,214,194,0.18), transparent 30%);
+
+  animation: bgMove 16s ease-in-out infinite alternate;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  backdrop-filter: blur(80px);
+}
+
+@keyframes bgMove {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  50% {
+    transform: translate(-20px, 20px) scale(1.05);
+  }
+
+  100% {
+    transform: translate(20px, -20px) scale(1.1);
+  }
+}
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 960px) {
+  nav, #home, .strip, .sec, footer { padding-left: 24px; padding-right: 24px; }
+  nav.scrolled { padding-left: 24px; padding-right: 24px; }
+  .hero-wrap, #about .sec-inner, .exp-grid, .hire-grid { grid-template-columns: 1fr; }
+  .hero-card { display: none; }
+  .ec.featured { grid-column: span 1; }
+  .strip-grid { grid-template-columns: 1fr 1fr; }
+  .contact-banner { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; gap: 18px; text-align: center; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">Rithika<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#hire">Hire Me</a></li>
+  </ul>
+  <a href="form.html" class="nav-cta">Say Hello</a>
+</nav>
+
+<!-- ════ HERO ════ -->
+<section id="home">
+  <div class="hero-wrap">
+
+    <!-- Left -->
+    <div>
+      <div class="hero-pill">Available for work &amp; mentoring</div>
+      <h1 class="hero-h1">
+        AIML Graduate,<br/>
+        Developer <em>&amp;</em><br/>
+        UPSC Mentor.
+      </h1>
+      <p class="hero-sub">
+        I design, research, mentor — and bridge the worlds<br/>
+        of technology and civil governance.
+      </p>
+      <div class="hero-tags">
+        <span class="tag">B.Tech - AIML </span>
+        <span class="tag t-sand">UI/UX Design</span>
+        <span class="tag">Website Developer</span>
+        <span class="tag">Prompt Engineer</span>
+        <span class="tag t-rose">IEEE Published</span>
+        <span class="tag t-sand">UPSC Aspirant 2025–28</span>
+        <span class="tag">Upsc Mentor</span>
+        <span class="tag" style="background:var(--plum-lt);border-color:var(--plum-mid);color:var(--plum);">Social Media Branding</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#hire" class="btn-fill">Hire Me</a>
+        <a href="#experience" class="btn-ghost">View Work ↗</a>
+      </div>
+    </div>
+
+    <!-- Right card -->
+    <div class="hero-card">
+      <div class="hc-top">
+        <div class="hc-ava">R</div>
+        <div>
+          <div class="hc-name">Rithika</div>
+          <div class="hc-role">Developer .  Designer . Mentor . Digital Marketer</div>
+        </div>
+      </div>
+      <div class="hc-divider"></div>
+      <div class="hc-stats">
+        <div class="hc-stat">
+          <div class="hc-sv">1</div>
+          <div class="hc-sl">IEEE Paper</div>
+        </div>
+        <div class="hc-stat">
+          <div class="hc-sv">4mo</div>
+          <div class="hc-sl">Hitachi</div>
+        </div>
+        <div class="hc-stat">
+          <div class="hc-sv">3+</div>
+          <div class="hc-sl">Yrs UPSC</div>
+        </div>
+      </div>
+      <div class="hc-divider"></div>
+      
+      <div class="hc-ieee">
+        <div class="hc-dot"></div>
+        <div class="hc-ieee-text">IEEE Published — Deep Learning Research</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════ STRIP ════ -->
+<div class="strip">
+  <div class="strip-grid" style="grid-template-columns:repeat(5,1fr);">
+    <div class="strip-item rv">
+      <div class="strip-icon">🎨</div>
+      <div class="strip-title">Design & Dev</div>
+      <div class="strip-desc">UI/UX design, web development & AI-powered app building using Figma, React, Python and more.</div>
+    </div>
+    <div class="strip-item rv d1">
+      <div class="strip-icon">🔬</div>
+      <div class="strip-title">AI Research</div>
+      <div class="strip-desc">IEEE-published deep learning researcher. Plant disease detection using advanced neural networks.</div>
+    </div>
+    <div class="strip-item rv d2">
+      <div class="strip-icon">🏛️</div>
+      <div class="strip-title">UPSC Mentoring</div>
+      <div class="strip-desc">Guiding aspirants through Prelims, Mains & Interview — with expertise in Polity & Environment.</div>
+    </div>
+    <div class="strip-item rv d3">
+      <div class="strip-icon">📊</div>
+      <div class="strip-title">Business Analysis</div>
+      <div class="strip-desc">Trend & target analysis for businesses of any kind — clear, data-informed insights for growth.</div>
+    </div>
+    <div class="strip-item rv d4">
+      <div class="strip-icon" style="background:var(--plum-lt);border-color:var(--plum-mid);">🎯</div>
+      <div class="strip-title">Digital Marketing</div>
+      <div class="strip-desc">Brand identity, social media design, campaign visuals & social media branding consultancy.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ ABOUT ════ -->
+<section id="about" class="sec">
+  <div class="sec-inner">
+    <div>
+      <div class="sec-label rv">About Me</div>
+      <h2 class="sec-h rv">Two paths.<br/><em>One purpose.</em></h2>
+      <p class="sec-sub rv">Technology and governance are the two greatest levers of change — I chose both.</p>
+      <p class="about-p rv">
+        I'm <strong>Rithika</strong> — a B.Tech AIML graduate who published her final year project in <strong>IEEE</strong>, 
+        interned at <strong>Hitachi Energy</strong>, and then chose a path most engineers don't: 
+        preparing for the <strong>UPSC Civil Services Examination</strong>.
+      </p>
+      <p class="about-p rv">
+        I freelance in <strong>design, development, social medial Branding, mentor UPSC aspirants </strong>, 
+        with a focus on <strong>Polity &amp; Environment</strong>, and keep building things that create real impact.
+      </p>
+    </div>
+    <div class="about-cards">
+      <div class="a-card rv">
+        <div class="a-icon ic-sand">📄</div>
+        <div>
+          <div class="a-title">IEEE Published Researcher</div>
+          <div class="a-text">Deep learning-based plant disease detection — published in IEEE 2025 at the undergraduate level.</div>
+        </div>
+      </div>
+      <div class="a-card rv d1">
+        <div class="a-icon ic-rose">⚡</div>
+        <div>
+          <div class="a-title">Hitachi Energy — Developer Intern</div>
+          <div class="a-text">4 months of professional software development at a global energy technology leader.</div>
+        </div>
+      </div>
+      <div class="a-card rv d2">
+        <div class="a-icon ic-sage">🏛️</div>
+        <div>
+          <div class="a-title">UPSC Aspirant &amp; Mentor</div>
+          <div class="a-text">3-year UPSC journey (2025–2028). Guiding students through strategy, subjects &amp; mindset.</div>
+        </div>
+      </div>
+      <div class="a-card rv d3">
+        <div class="a-icon ic-lav">🤖</div>
+        <div>
+          <div class="a-title">Social Media Branding Consultant</div>
+          <div class="a-text">Brand strategy, logo systems, campaign visuals &amp; full social media identity for businesses.</div>     
+        </div>
+      </div>
+      <div class="a-card rv d4">
+        <div class="a-icon ic-plum">🎯</div>
+        <div>
+          <div class="a-title">AI &amp; Prompt Engineer</div>
+          <div class="a-text">Applying generative AI and prompt engineering to accelerate real-world productivity.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SKILLS ════ -->
+<section id="skills" class="sec">
+  <div class="sec-inner">
+    <div class="sec-label rv">Skills</div>
+    <h2 class="sec-h rv">My toolkit.</h2>
+    <div class="skills-tabs rv">
+      <button class="sk-tab active" onclick="switchSkill(event,'dev')">Design &amp; Dev</button>
+      <button class="sk-tab" onclick="switchSkill(event,'upsc')">UPSC</button>
+      <button class="sk-tab" onclick="switchSkill(event,'tools')">Tools &amp; AI</button>
+      <button class="sk-tab" onclick="switchSkill(event,'dm')">Digital Marketing</button>
+    </div>
+
+    <!-- Dev -->
+    <div class="sk-panel active" id="sk-dev">
+      <div class="skills-grid">
+        <div class="sk-card"><div class="sk-em">🐍</div><div class="sk-name">Python</div><div class="sk-track"><div class="sk-bar bar-rose" style="--w:.85"></div></div><div class="sk-lv">Advanced · ML &amp; Scripting</div></div>
+        <div class="sk-card"><div class="sk-em">⚛️</div><div class="sk-name">React</div><div class="sk-track"><div class="sk-bar bar-rose" style="--w:.78"></div></div><div class="sk-lv">Proficient · Frontend</div></div>
+        <div class="sk-card"><div class="sk-em">🌐</div><div class="sk-name">HTML / CSS</div><div class="sk-track"><div class="sk-bar bar-rose" style="--w:.92"></div></div><div class="sk-lv">Advanced · Responsive UI</div></div>
+        <div class="sk-card"><div class="sk-em">🗄️</div><div class="sk-name">MongoDB</div><div class="sk-track"><div class="sk-bar bar-rose" style="--w:.74"></div></div><div class="sk-lv">Proficient · NoSQL</div></div>
+        <div class="sk-card"><div class="sk-em">🗄️s</div><div class="sk-name">Neon Database</div><div class="sk-track"><div class="sk-bar bar-rose" style="--w:.82"></div></div><div class="sk-lv">Advanced · PostgreSQL </div></div>
+      </div>
+    </div>
+
+    <!-- UPSC -->
+    <div class="sk-panel" id="sk-upsc">
+      <div class="skills-grid">
+        <div class="sk-card"><div class="sk-em">⚖️</div><div class="sk-name">Polity</div><div class="sk-track"><div class="sk-bar bar-sage" style="--w:.93"></div></div><div class="sk-lv">Expert · Core Strength</div></div>
+        <div class="sk-card"><div class="sk-em">🌿</div><div class="sk-name">Environment</div><div class="sk-track"><div class="sk-bar bar-sage" style="--w:.91"></div></div><div class="sk-lv">Expert · Acts &amp; Policy</div></div>
+        <div class="sk-card"><div class="sk-em">📚</div><div class="sk-name">UPSC Mentoring</div><div class="sk-track"><div class="sk-bar bar-sage" style="--w:.88"></div></div><div class="sk-lv">3+ Year Journey</div></div>
+        <div class="sk-card"><div class="sk-em">🗺️</div><div class="sk-name">Geography</div><div class="sk-track"><div class="sk-bar bar-sage" style="--w:.80"></div></div><div class="sk-lv">Strong · Physical &amp; Human</div></div>
+        <div class="sk-card"><div class="sk-em">📈</div><div class="sk-name">Economy</div><div class="sk-track"><div class="sk-bar bar-sage" style="--w:.79"></div></div><div class="sk-lv">Proficient · Current Affairs</div></div>
+        <div class="sk-card"><div class="sk-em">✍️</div><div class="sk-name">Answer Writing</div><div class="sk-track"><div class="sk-bar bar-sage" style="--w:.67"></div></div><div class="sk-lv">Advanced · Mains Strategy</div></div>
+      </div>
+    </div>
+
+    <!-- Tools -->
+    <div class="sk-panel" id="sk-tools">
+      <div class="skills-grid">
+        <div class="sk-card"><div class="sk-em">🎨</div><div class="sk-name">Figma</div><div class="sk-track"><div class="sk-bar bar-lav" style="--w:.90"></div></div><div class="sk-lv">Advanced · UI/UX Prototyping</div></div>
+        <div class="sk-card"><div class="sk-em">✏️</div><div class="sk-name">Canva</div><div class="sk-track"><div class="sk-bar bar-lav" style="--w:.94"></div></div><div class="sk-lv">Expert · Visual Content</div></div>
+        <div class="sk-card"><div class="sk-em">🖼️</div><div class="sk-name">Photoshop</div><div class="sk-track"><div class="sk-bar bar-lav" style="--w:.82"></div></div><div class="sk-lv">Proficient · Photo &amp; Graphics</div></div>
+        <div class="sk-card"><div class="sk-em">🎭</div><div class="sk-name">Adobe Suite</div><div class="sk-track"><div class="sk-bar bar-lav" style="--w:.78"></div></div><div class="sk-lv">Proficient · Illustrator &amp; XD</div></div>
+        <div class="sk-card"><div class="sk-em">🤖</div><div class="sk-name">AI &amp; Prompt Eng.</div><div class="sk-track"><div class="sk-bar bar-lav" style="--w:.92"></div></div><div class="sk-lv">Expert · Generative AI</div></div>
+      </div>
+    </div>
+
+    <!-- Digital Marketing -->
+    <div class="sk-panel" id="sk-dm">
+      <div class="skills-grid">
+        <div class="sk-card"><div class="sk-em">🧭</div><div class="sk-name">Brand Strategy</div><div class="sk-track"><div class="sk-bar bar-plum" style="--w:.88"></div></div><div class="sk-lv">Advanced · Identity &amp; Positioning</div></div>
+        <div class="sk-card"><div class="sk-em">🏷️</div><div class="sk-name">Logo Systems</div><div class="sk-track"><div class="sk-bar bar-plum" style="--w:.84"></div></div><div class="sk-lv">Proficient · Brand Mark Design</div></div>
+        <div class="sk-card"><div class="sk-em">🖋️</div><div class="sk-name">Typography</div><div class="sk-track"><div class="sk-bar bar-plum" style="--w:.82"></div></div><div class="sk-lv">Proficient · Type Hierarchy</div></div>
+        <div class="sk-card"><div class="sk-em">🎨</div><div class="sk-name">Color Systems</div><div class="sk-track"><div class="sk-bar bar-plum" style="--w:.90"></div></div><div class="sk-lv">Expert · Palette &amp; Brand Tones</div></div>
+        <div class="sk-card"><div class="sk-em">📱</div><div class="sk-name">Social Media Design</div><div class="sk-track"><div class="sk-bar bar-plum" style="--w:.93"></div></div><div class="sk-lv">Expert · Posts, Stories &amp; Reels</div></div>
+        <div class="sk-card"><div class="sk-em">📣</div><div class="sk-name">Campaign Visuals</div><div class="sk-track"><div class="sk-bar bar-plum" style="--w:.86"></div></div><div class="sk-lv">Advanced · Ads &amp; Banners</div></div>
+        <div class="sk-card"><div class="sk-em">📦</div><div class="sk-name">Product Mockups</div><div class="sk-track"><div class="sk-bar bar-plum" style="--w:.85"></div></div><div class="sk-lv">Proficient · Realistic Previews</div></div>
+        <div class="sk-card"><div class="sk-em">🎬</div><div class="sk-name">Reels &amp; Visual Content</div><div class="sk-track"><div class="sk-bar bar-plum" style="--w:.80"></div></div><div class="sk-lv">Proficient · Video Creatives</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ EXPERIENCE ════ -->
+<section id="experience" class="sec">
+  <div class="sec-inner">
+    <div class="sec-label rv">Experience</div>
+    <h2 class="sec-h rv">Where I've been.<br/><em>What I've built.</em></h2>
+    <div class="exp-grid">
+
+      <!-- IEEE Featured -->
+      <div class="ec featured sand rv">
+        <span class="ep ep-sand">★ IEEE Publication</span>
+        <div class="ec-org">IEEE · 2025</div>
+        <div class="ec-title">Next Generation Plant Management System &amp; Disease Detection Using Advanced Deep Learning</div>
+        <div class="ec-period">Final Year Project → Published Research</div>
+        <div class="ec-desc">
+          Developed an AI-powered plant health monitoring system using advanced deep learning architectures for real-time disease detection and classification. Achieved significant accuracy improvements over existing benchmarks. Successfully peer-reviewed and published in IEEE — a rare achievement at the undergraduate level.
+        </div>
+        <a href="https://ieeexplore.ieee.org/document/11040896" target="_blank" class="ec-link">View IEEE Publication →</a>
+        <div class="ec-tags">
+          <span class="etc">Deep Learning</span>
+          <span class="etc">CNN</span>
+          <span class="etc">Python</span>
+          <span class="etc">TensorFlow</span>
+          <span class="etc">Image Processing</span>
+          <span class="etc">IEEE</span>
+        </div>
+      </div>
+
+      <!-- Hitachi -->
+      <div class="ec rose rv">
+        <span class="ep ep-rose">Internship</span>
+        <div class="ec-org">Hitachi Energy · India</div>
+        <div class="ec-title">Software Developer Intern</div>
+        <div class="ec-period">4 Months · </div>
+        <div class="ec-desc">
+          Contributed as a developer at Hitachi Energy, a global energy technology leader. Worked on enterprise-grade software in a collaborative, agile professional environment, gaining deep industry exposure.
+        </div>
+        <div class="ec-tags">
+          <span class="etc">Logo & Design</span>
+          <span class="etc">SQL</span>
+          <span class="etc">Front-end Developer</span>
+        </div>
+      </div>
+
+      <!-- UPSC -->
+      <div class="ec sage rv">
+        <span class="ep ep-sage">Ongoing · 2025–2028</span>
+        <div class="ec-org">UPSC Civil Services</div>
+        <div class="ec-title">Aspirant &amp; UPSC Mentor</div>
+        <div class="ec-period">3+ Year Journey</div>
+        <div class="ec-desc">
+          Actively preparing for UPSC CSE with strong command over Polity and Environment. Simultaneously mentoring aspirants through full UPSC journey — from subject selection and strategy to answer writing and interview.
+        </div>
+        <div class="ec-tags">
+          <span class="etc">Polity</span>
+          <span class="etc">Environment</span>
+          <span class="etc">Mentoring</span>
+          <span class="etc">Mains Strategy</span>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="ec lav rv">
+        <span class="ep ep-lav">Education</span>
+        <div class="ec-org">B.Tech · AIML</div>
+        <div class="ec-title">Artificial Intelligence &amp; Machine Learning</div>
+        <div class="ec-period">2020–2024 · Graduated</div>
+        <div class="ec-desc">
+          Completed B.Tech in AI &amp; ML with a strong foundation in machine learning, deep learning, algorithms and software engineering. Final year project published in IEEE.
+        </div>
+        <div class="ec-tags">
+          <span class="etc">AIML</span>
+          <span class="etc">Machine Learning</span>
+          <span class="etc">Deep Learning</span>
+          <span class="etc">Research</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ HIRE ME ════ -->
+<section id="hire" class="sec">
+  <div class="sec-inner">
+    <div class="sec-label rv">Hire Me</div>
+    <h2 class="sec-h rv">Three worlds.<br/><em>One expert.</em></h2>
+    <p class="sec-sub rv">Pick your track — tech &amp; design, UPSC mentoring, or digital marketing. All with full commitment.</p>
+
+    <div class="hire-grid">
+
+      <!-- Dev / Design -->
+      <div class="hc2 dev rv">
+        <div class="hc2-deco"></div>
+        <div class="hc2-icon">💻</div>
+        <div class="hc2-type">Designer &amp; Developer</div>
+        <div class="hc2-title">Tech Freelance</div>
+        <ul class="hc2-list">
+          <li>UI / UX Design — Figma, Photoshop &amp; Adobe Suite</li>
+          <li>Web Development with React, Python &amp; MongoDB</li>
+          <li>Business Trend &amp; Target Analysis</li>
+          <li>AI Integration &amp; Prompt Engineering</li>
+          <li>Web &amp; App Development — end to end</li>
+          <li>Responsive, production-ready interfaces</li>
+        </ul>
+        <a href="form.html" class="hc2-btn" style="display:flex; align-items:center; justify-content:center; text-decoration:none;">
+          Get a Quote →
+        </a>
+      </div>
+
+      <!-- UPSC -->
+      <div class="hc2 upsc rv d1">
+        <div class="hc2-deco"></div>
+        <div class="hc2-icon">🏛️</div>
+        <div class="hc2-type">UPSC Mentor</div>
+        <div class="hc2-title">Civil Services Guidance</div>
+        <ul class="hc2-list">
+          <li>End-to-end UPSC guidance — Prelims to Interview</li>
+          <li>Polity &amp; Environment — deep conceptual teaching</li>
+          <li>Personalised study plan &amp; strategy building</li>
+          <li>Answer writing practice with detailed feedback</li>
+          <li>Current affairs mapped to static syllabus</li>
+          <li>3+ years of lived UPSC experience (2025–2028)</li>
+        </ul>
+        <a href="form.html" class="hc2-btn" style="display:flex; align-items:center; justify-content:center; text-decoration:none;">
+          Book a Session →
+        </a>
+      </div>
+
+      <!-- Digital Marketing -->
+      <div class="hc2 dm rv d2">
+        <div class="hc2-deco"></div>
+        <div class="hc2-icon">🎯</div>
+        <div class="hc2-type">Social Media Branding Consultant</div>
+        <div class="hc2-title">Digital Marketing</div>
+        <ul class="hc2-list">
+          <li>Brand Strategy &amp; Brand Identity Design</li>
+          <li>Logo Systems, Typography &amp; Color Systems</li>
+          <li>Social Media Design — Posts, Stories &amp; Reels</li>
+          <li>Campaign Visuals, Posters &amp; Banners</li>
+          <li>Product Mockups &amp; Visual Content</li>
+          <li>Business Page Management &amp; Branding</li>
+        </ul>
+        <a href="form.html" class="hc2-btn" style="display:flex; align-items:center; justify-content:center; text-decoration:none;">
+          Get a Quote →
+        </a>
+      </div>
+    </div>
+
+    <!-- Contact Banner -->
+    <div class="contact-banner rv">
+      <div>
+        <div class="cb-h">Get In <em>touch</em></div>
+        <div class="cb-sub" style="margin-top:14px; line-height:1.9; color:#c17b6e;">
+            📧 rithikavj1@gmail.com<br/>
+            📞 +91 7397473956
+          </div>
+        <div class="cb-sub" style = "color:#6b8c7a;">Open to freelance projects, UPSC mentoring &amp; long-term collaborations.</div>
+      </div>
+      <div class="cb-btns">
+        <a href="https://instagram.com/rithikaahh__"class="btn-fill">Instagram</a>
+        <a href="https://linkedin.com/in/rithika-sri-reddy-vj-021a52249" target="_blank" class="btn-ghost">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="f-logo">Rithika<span>.</span></div>
+    <div class="f-copy">© 2025 · AIML Graduate · IEEE Researcher · UPSC Aspirant</div>
+    <div class="f-links">
+      <a href="https://linkedin.com/in/rithika-sri-reddy-vj-021a52249" target="_blank" class="f-link">LinkedIn</a>
+      <a href="https://ieeexplore.ieee.org/document/11040896" target="_blank" class="f-link">IEEE Paper</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Nav scroll */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50));
+
+/* Reveal on scroll */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+/* Skills tabs */
+function switchSkill(e, id) {
+  document.querySelectorAll('.sk-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.sk-panel').forEach(p => p.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById('sk-' + id).classList.add('active');
+  runBars();
+}
+
+/* Skill bars */
+function runBars() {
+  document.querySelectorAll('.sk-card').forEach((card, i) => {
+    const bar = card.querySelector('.sk-bar');
+    const w = getComputedStyle(bar).getPropertyValue('--w').trim();
+    bar.style.transform = 'scaleX(0)';
+    card.classList.remove('go');
+    setTimeout(() => {
+      card.classList.add('go');
+      bar.style.transform = `scaleX(${w})`;
+    }, i * 90 + 60);
+  });
+}
+/* Trigger bars when skills section enters view */
+new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) runBars(); });
+}, { threshold: 0.15 }).observe(document.getElementById('skills'));
+
+/* Mail helper */
+function openMail(t) {
+  const subjects = {
+    dev:  'Freelance Design / Dev Enquiry',
+    upsc: 'UPSC Mentoring Session Booking',
+    dm:   'Digital Marketing / Branding Enquiry'
+  };
+  window.location.href = `mailto:rithikavj1@gmail.com?subject=${encodeURIComponent(subjects[t] || 'Portfolio Enquiry')}`;
+}
+</script>
+</body>
+</html>
